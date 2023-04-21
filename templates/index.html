@@ -49,25 +49,16 @@
                     <button type="submit" class="btn btn-primary btn-lg">Cadastrar</button>
                   </div>
                 </form>
-
                   {% with messages = get_flashed_messages(with_categories=true) %}
                     {% for category, message in messages %}
                       <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
                           {{ message }}
-                          <button type="button" class="btn btn-sm {% if category == 'success' %}btn-success{% else %}btn-danger{% endif %}" data-bs-dismiss="alert" aria-label="Close">
+                          <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close">
                               <i class="bi bi-x"></i>
                           </button>
                       </div>
                     {% endfor %}
                   {% endwith %}
-
-
-<!--                  {% if get_flashed_messages() %}-->
-<!--                    <div class="alert alert-success alert-dismissible fade show px-2" role="alert">-->
-<!--                      {{ get_flashed_messages()[0] }}-->
-<!--                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>-->
-<!--                    </div>-->
-<!--                  {% endif %}-->
               </div>
               <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                 <img src="https://miro.medium.com/v2/resize:fit:591/0*sNYQK1-uN4WEf8SS.jpg"
