@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from models.db import db
-from models.usuario_models import Usuario
-from werkzeug.security import generate_password_hash
+from models import usuario_models
+from werkzeug.security import check_password_hash
+from flask_login import login_user
 
 login_route_bp = Blueprint('login_route', __name__)
 
@@ -16,4 +16,15 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         senha = request.form['senha']
+        if not valida_campos(email, senha):
+            return redirect(url_for('login_route.login'))
+        usuario = usuario_models.Usuario.query.filter_by(email=email).first()
+        if not usuario or not check_password_hash(usuario.senha, senha):
+            flash('Email ou senha inválidos', 'danger')
+            return redirect(url_for('login_route.login'))
+
+        login_user(usuario)
+        flash('Cadastro realizado com sucesso!', 'success')
+        return redirect(url_for('home_route.home'))
+
     return render_template('login.html')

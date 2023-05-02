@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from models.db import db
 from models.usuario_models import Usuario
 from werkzeug.security import generate_password_hash
+from flask_login import login_user
 
 user_routes_bp = Blueprint('user_routes', __name__)
 
@@ -41,5 +42,7 @@ def cadastro():
                 flash('Erro no cadastro', 'danger')
 
             flash('Cadastro realizado com sucesso!', 'success')
-            return redirect(url_for('user_routes.cadastro'))
+            login_user(usuario)
+            return redirect(url_for('login_route.login'))
+
     return render_template('index.html')

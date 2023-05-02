@@ -1,7 +1,8 @@
 from flask import Flask
 from models.db import db
-from routes.user_routes import user_routes_bp
-from routes.login_route import login_route_bp
+from models import usuario_models
+from routes import user_routes, login_route, home_route, logout_route
+from flask_login import LoginManager
 
 # configuração da aplicação
 app = Flask(__name__)
@@ -9,8 +10,17 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///usuario.sqlite3'
 app.config['SECRET_KEY'] = 'secretkey'
 
 # registra o Blueprint das rotas de usuário
-app.register_blueprint(user_routes_bp)
-app.register_blueprint(login_route_bp)
+app.register_blueprint(user_routes.user_routes_bp)
+app.register_blueprint(login_route.login_route_bp)
+app.register_blueprint(home_route.home_route_bp)
+app.register_blueprint(logout_route.logout_route_bp)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return usuario_models.Usuario.query.get(int(user_id))
 
 db.init_app(app)
 
