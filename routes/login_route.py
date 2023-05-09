@@ -24,7 +24,6 @@ def login():
             return redirect(url_for('login_route.login'))
 
         login_user(usuario)
-        flash('Cadastro realizado com sucesso!', 'success')
         return redirect(url_for('home_route.home'))
 
     return render_template('login.html')

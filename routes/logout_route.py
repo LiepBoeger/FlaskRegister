@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, redirect, url_for
 from flask_login import login_required, logout_user
 
 logout_route_bp = Blueprint('logout_route', __name__)

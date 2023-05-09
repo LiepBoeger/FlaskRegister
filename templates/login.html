@@ -32,17 +32,19 @@
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <button type="submit" class="btn btn-dark btn-lg" style="background-color: #404040">Entrar</button>
                   </div>
-
                 </form>
+                <div class="text-center mt-3">
+                  <p>Não possui uma conta? <a href="{{url_for('user_routes.cadastro')}}">Cadastre-se</a></p>
+                </div>
 
                   {% with messages = get_flashed_messages(with_categories=true) %}
                     {% for category, message in messages %}
-                      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                          {{ message }}
-                          <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close">
-                              <i class="bi bi-x"></i>
-                          </button>
-                      </div>
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </div>
                     {% endfor %}
                   {% endwith %}
               </div>
