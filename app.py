@@ -1,7 +1,7 @@
 from flask import Flask
 from models.db import db
 from models import usuario_models
-from routes import cadastro_route, login_route, home_route, logout_route
+from routes import cadastro_route, login_route, home_route, logout_route, cadastro_jogador_route
 from flask_login import LoginManager
 
 # configuração da aplicação
@@ -14,6 +14,7 @@ app.register_blueprint(cadastro_route.cadastro_route_bp)
 app.register_blueprint(login_route.login_route_bp)
 app.register_blueprint(home_route.home_route_bp)
 app.register_blueprint(logout_route.logout_route_bp)
+app.register_blueprint(cadastro_jogador_route.cadastro_jogador_route_bp)
 
 login_manager = LoginManager()
 login_manager.init_app(app)

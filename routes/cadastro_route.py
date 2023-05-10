@@ -4,7 +4,7 @@ from models.usuario_models import Usuario
 from werkzeug.security import generate_password_hash
 from flask_login import login_user
 
-cadastro_route_bp = Blueprint('user_routes', __name__)
+cadastro_route_bp = Blueprint('cadastro_route', __name__)
 
 def valida_campos(nome, email, senha, confirma_senha):
 
@@ -23,7 +23,7 @@ def valida_campos(nome, email, senha, confirma_senha):
 
     return True
 
-@cadastro_route_bp.route('/', methods=['GET', 'POST'])
+@cadastro_route_bp.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
     if request.method == 'POST':
         nome = request.form['nome']
