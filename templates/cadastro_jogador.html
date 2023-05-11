@@ -3,15 +3,12 @@
 <nav class="p-4 navbar navbar-expand-lg navbar-dark bg-dark " style="height: 80px">
   <div class="container-fluid">
     <div class="col-md-8">
-      <h1  class="navbar-brand" style="font-size:30px ">Home</h1>
+      <h1 class="navbar-brand" style="font-size:30px "><a class="nav-link" href="{{url_for('home_route.home')}}">Home</a></h1>
     </div>
     <div class="col-md-4 collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
         <li class="nav-item border-end border-secondary">
           <a class="nav-link"  style="margin: 0px 20px"  href="">Cadastrar Jogador</a>
-        </li>
-        <li class="nav-item border-end border-secondary">
-          <a class="nav-link" style="margin: 0px 20px" href="">Sobre</a>
         </li>
         <form class="form-inline my-2 my-lg-0" action="{{url_for('logout_route.logout')}}" method="POST">
           <button class="btn btn-outline-danger my-2 my-sm-0" style="margin: 0px 20px" type="submit">Sair</button>
@@ -21,36 +18,47 @@
   </div>
 </nav>
 
-<form action="" method="POST" class="">
-    <div style="padding: 20px 50px;">
+<form action="{{url_for('cadastro_jogador_route.cadastro')}}" method="POST">
+    <div style="padding: 20px 500px;">
         <h2 style="text-align: center; color: white;">Cadastrar Jogador</h2>
         <hr>
         <table class="table table-bordered table-hover table-dark table-striped">
-        <thead>
-            <tr>
-              <th width="10%">Id</th>
-              <th width="70%">Nome</th>
-              <th width="10%">Número de Vitórias</th>
-              <th width="10%">Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <input class="form-control" type="text" name="id" style="background-color: #404040; border: none; text-align: right;" readonly>
-                </td>
-                <td>
-                    <input class="form-control" type="text" name="nome" style="background-color: #404040; border: none; color: white;" required>
-                </td>
-                <td>
-                    <input class="form-control" type="number" name="qt_vitorias" style="background-color: #404040; border: none; color: white;" required>
-                </td>
-                <td>
-                    <a href="" class="btn btn-secondary btn-xs">Salvar</a>
-                    <a href="" onclick="return confirm('Deseja excluir este registro?')" class="btn btn-danger btn-xs ">Excluir</a>
-                </td>
-            </tr>
-        </tbody>
+            <thead>
+                <tr>
+                  <th width="10%">Id</th>
+                  <th width="62%">Nome</th>
+                  <th width="18%">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input class="form-control" type="text" name="id" style="background-color: #404040; border: none; text-align: right;" readonly>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="nome" style="background-color: #404040; border: none; color: white;" required>
+                    </td>
+                    <td style="display: flex; justify-content: center;">
+                        <button class="btn btn-success" style="width: 60%;">Adicionar</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                {% for jogador in jogadores %}
+                    <tr>
+                        <td>
+                            {{jogador.id}}
+                        </td>
+                        <td>
+                            {{jogador.nome}}
+                        </td>
+                        <td style="display: flex; justify-content: center;">
+                            <a href="{{ url_for('exclui_jogador_route.exclui_jogador', id=jogador.id) }}" onclick="return confirm('Deseja excluir este registro?')" class="btn btn-danger btn-xs" style="width: 60%;">Excluir</a>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tfoot>
         </table>
     <hr>
     </div>

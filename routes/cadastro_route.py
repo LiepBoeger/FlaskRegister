@@ -23,7 +23,7 @@ def valida_campos(nome, email, senha, confirma_senha):
 
     return True
 
-@cadastro_route_bp.route('/cadastro', methods=['GET', 'POST'])
+@cadastro_route_bp.route('/', methods=['GET', 'POST'])
 def cadastro():
     if request.method == 'POST':
         nome = request.form['nome']
