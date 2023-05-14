@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from models import usuario_models
 from werkzeug.security import check_password_hash
 from flask_login import login_user
@@ -24,6 +24,7 @@ def login():
             return redirect(url_for('login_route.login'))
 
         login_user(usuario)
+        session['id'] = usuario.id
         return redirect(url_for('home_route.home'))
 
     return render_template('login.html')

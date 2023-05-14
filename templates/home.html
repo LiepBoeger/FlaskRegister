@@ -4,7 +4,7 @@
 <nav class="p-4 navbar navbar-expand-lg navbar-dark bg-dark " style="height: 80px">
   <div class="container-fluid">
     <div class="col-md-8">
-      <h1  class="navbar-brand" style="font-size:30px ">Bem vindo, {{usuario.nome.capitalize()}}</h1>
+      <h1  class="navbar-brand" style="font-size:30px ">Resultados dos Jogos</h1>
     </div>
     <div class="col-md-4 collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
@@ -18,4 +18,36 @@
     </div>
   </div>
 </nav>
+
+<form action="{{url_for('home_route.home')}}" method="POST">
+    <div style="padding: 20px 500px;">
+        <h2 style="text-align: center; color: white;">Resultados Parciais</h2>
+        <hr>
+        <table class="table table-bordered table-hover table-dark table-striped">
+            <thead>
+                <tr>
+                  <th width="10%">Id</th>
+                  <th width="65%">Nome</th>
+                  <th width="25%">Total Vitórias</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for jogador in jogadores %}
+                <tr>
+                    <td class="align-middle">
+                        {{jogador.id}}
+                    </td>
+                    <td class="align-middle">
+                        {{jogador.nome}}
+                    </td>
+                    <td>
+                        <input name="total_vitorias_{{jogador.id}}" type="number" class="form-control" style="background: transparent; border: none; color: white;" value="{{jogador.total_vitorias}}" min="0">
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button class="btn btn-success mt-1">Salvar</button>
+    </div>
+</form>
 {% endblock conteudo%}

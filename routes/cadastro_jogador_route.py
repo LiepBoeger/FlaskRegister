@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from models.db import db
 from models.jogador_models import Jogador
 
@@ -11,9 +11,11 @@ def cadastro():
         if not nome:
             flash('Preencha o nome do jogador', 'danger')
         else:
-            jogador = Jogador(nome, 0)
+            id_usuario = session.get('id')
+            jogador = Jogador(id_usuario, nome, 0)
             db.session.add(jogador)
             db.session.commit()
             return redirect(url_for('cadastro_jogador_route.cadastro'))
-    jogador = Jogador.query.all()
+    id_usuario = session.get('id')
+    jogador = Jogador.query.filter_by(id_usuario=id_usuario).all()
     return render_template('cadastro_jogador.html', jogadores=jogador)
