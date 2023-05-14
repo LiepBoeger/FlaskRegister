@@ -41,13 +41,13 @@
                         {{jogador.nome}}
                     </td>
                     <td>
-                        <input name="total_vitorias_{{jogador.id}}" type="number" class="form-control" style="background: transparent; border: none; color: white;" value="{{jogador.total_vitorias}}" min="0">
+                        <input name="total_vitorias" type="number" class="form-control" style="background: transparent; border: none; color: white;" value="{{jogador.total_vitorias}}" min="0">
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <button class="btn btn-success mt-1">Salvar</button>
+        <button class="btn btn-success mt-1" type="submit">Salvar</button>
     </div>
 </form>
 {% endblock conteudo%}

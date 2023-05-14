@@ -14,8 +14,9 @@ def home():
     if request.method == 'POST':
         total_vitorias = request.form.getlist('total_vitorias')
         for i, jogador in enumerate(jogadores):
-            jogador.total_vitorias = int(total_vitorias[i])
-            db.session.add(jogador)
+            if i < len(total_vitorias):
+                jogador.total_vitorias = int(total_vitorias[i])
+                db.session.add(jogador)
         db.session.commit()
         return redirect(url_for('home_route.home'))
 
